@@ -68,6 +68,8 @@ Each key for groups is any arbitrary name that will define the group in Ansible 
    - `None` species that any applications with none of the tags specified will be part of the group. 
    - By default, if no `logic` key is specified, `All` is used.
 
+This parameter is optional, if it is not set then the results will not be grouped.
+
 ### filter-tags
 
 The `filter-tags`key can be used to filter all servers based on a set of tags. 
@@ -75,3 +77,5 @@ The `filter-tags`key can be used to filter all servers based on a set of tags.
 This key has lower precedence than `groups`; if the groups key is specified these parameters will be ignored. 
 
 The accepted keys and structure for this tag is identical to the `groups`, just specify a `logic` and `tags` key directly.
+
+This parameter is option, if it is not set then all servers will be returned.
