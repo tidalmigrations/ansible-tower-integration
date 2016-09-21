@@ -17,15 +17,13 @@ export APP_INV_DOMAIN=appinvdemo.subdata.com
 export APP_INV_EMAIL=admin@subdata.com
 export APP_INV_PASSWORD=yoursecurepasswordhere!
 ```
-
-You can optionally provide a configuration file for the script. To do this you need to provide the configuration path as an environment variable. An example would be:
-
-`CONFIG_FILE=/root/app_inv.yml`
-
-
 ## Configuration
 
-A configuration file can optionally be provided to customize the results returned by the script. If no config file is provided the script will use the default values below. In order to use the configuration file you must provide it's location via an environment variable. See the previous section if you haven't already done this.
+A configuration file can optionally be provided to customize the results returned by the script. If no config file is provided the script will use the default values specified below. 
+
+In order to use the configuration file you must provide it's location via an environment variable. An example would be:
+
+`export CONFIG_FILE=/root/app_inv.yml`
 
 An exmaple configuration file would look like this:
 
@@ -33,10 +31,10 @@ An exmaple configuration file would look like this:
 property: "fqdn"
 
 groups:
-  development:
+  non-test:
     logic: None
     tags:
-      - DEV
+      - TEST
   production:
     logic: All
     tags:
@@ -45,7 +43,7 @@ groups:
 filter-tags:
   logic: Any
   tags:
-    - PROD
+    - TEST
 ```
 
 ### property
@@ -53,7 +51,7 @@ The `property` key is used to specify the property that will be used as the host
 
 Note that this property must be unique across all servers. 
 
-This paremter is optional, if it is not set the property `fqdn` will be used.
+This paremter is optional, if it is not set the default value of `fqdn` will be used.
 
 ### groups
 The `groups` key can be used to specify sets of tags to define one or more groups of servers. 
@@ -68,14 +66,14 @@ Each key for groups is any arbitrary name that will define the group in Ansible 
    - `None` species that any applications with none of the tags specified will be part of the group. 
    - By default, if no `logic` key is specified, `All` is used.
 
-This parameter is optional, if it is not set then the results will not be grouped.
+This parameter is optional, if there is no key then the results will not be grouped.
 
 ### filter-tags
 
-The `filter-tags`key can be used to filter all servers based on a set of tags. 
+The `filter-tags` key can be used to filter all servers based on a set of tags. 
 
 This key has lower precedence than `groups`; if the groups key is specified these parameters will be ignored. 
 
 The accepted keys and structure for this tag is identical to the `groups`, just specify a `logic` and `tags` key directly.
 
-This parameter is option, if it is not set then all servers will be returned.
+This parameter is optional, if there is no key then all servers will be returned.
