@@ -38,8 +38,8 @@ class ApplicationInventory(object):
     def _get_env_vars(self):
         API_PREFIX = "/api/"
         self.config_path = os.environ.get('CONFIG_PATH')
-        email = os.environ['APP_INV_EMAIL']
-        password = os.environ['APP_INV_PASSWORD']
+        email = os.environ.get('APP_INV_EMAIL')
+        password = os.environ.get('APP_INV_PASSWORD')
         domain = os.environ.get('APP_INV_DOMAIN')
         if domain and email and password:
             self.email = email
