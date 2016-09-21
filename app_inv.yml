@@ -1,2 +1,19 @@
-parsing:
-  property: "fqdn"
+# Use this to specify the property that will be used as the hostname for the servers. Note that this property must be unique across all servers.
+property: "fqdn"
+
+# This can be used to specify sets of tags to define one or more groups of servers. If the groups key is present it will use these paraemters over the filter-tags.
+groups:
+  development:
+    logic: None
+    tags:
+      - DEV
+  production:
+    logic: All
+    tags:
+      - PROD
+
+# This can be used to filter all servers based on a set of tags. If the groups key is specified these parameters will be ignored.
+filter-tags:
+  logic: Any
+  tags:
+    - PROD
