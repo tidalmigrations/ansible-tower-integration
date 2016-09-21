@@ -51,7 +51,7 @@ The `property` key is used to specify the property that will be used as the host
 
 Note that this property must be unique across all servers. 
 
-This paremter is optional, if it is not set the default value of `fqdn` will be used.
+This parameter is optional, if it is not set the default value of `fqdn` will be used.
 
 ### groups
 The `groups` key can be used to specify sets of tags to define one or more groups of servers. 
