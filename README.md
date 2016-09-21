@@ -23,7 +23,7 @@ A configuration file can optionally be provided to customize the results returne
 
 In order to use the configuration file you must provide it's location via an environment variable. An example would be:
 
-`export CONFIG_FILE=/root/app_inv.yml`
+`export CONFIG_PATH=/root/app_inv.yml`
 
 An exmaple configuration file would look like this:
 
