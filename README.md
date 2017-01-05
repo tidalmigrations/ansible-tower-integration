@@ -1,22 +1,35 @@
-# Application Inventory integration for Ansible
+# Flow Migration Suite integration for Ansible Tower
 
-This python script will populate ansible with a list of servers from the Application Inventory API.
+This script will allow your Ansible Tower instance to use servers that are stored in your Flow Migration Suite to run jobs against.
+
+If you are setting this up with Ansible Tower you should follow the tutorial posted [here](https://tidal.zendesk.com/hc/en-us/articles/115000763627)
+
+If you would like to learn more about how this script works directly you should continue reading below.
+
 
 ## Configure Environment Variables
 
 You must provide login credentials for the Application Inventory API via environment variables.
 
-- `APP_INV_DOMAIN`
-- `APP_INV_EMAIL`
-- `APP_INV_PASSWORD`
+- `FLOW_DOMAIN`
+- `FLOW_EMAIL`
+- `FLOW_PASSWORD`
 
 For example you could run the these three commands on the host running Ansible Tower to set these:
 
 ```
-export APP_INV_DOMAIN=appinvdemo.subdata.com
-export APP_INV_EMAIL=admin@subdata.com
-export APP_INV_PASSWORD=yoursecurepasswordhere!
+export FLOW_DOMAIN=flowdemo.tidalmg.com
+export FLOW_EMAIL=admin@tidalmigrations.com
+export FLOW_PASSWORD=yoursecurepasswordhere!
 ```
+
+If you need to configure a proxy you can set the environment variables:
+
+- `HTTP_PROXY`
+- `HTTPS_PROXY`
+
+This is needed if the script is running on a system that requires a proxy to reach your Flow Migration API.
+
 ## Configuration
 
 A configuration file can optionally be provided to customize the results returned by the script. If no config file is provided the script will use the default values specified below.
@@ -39,6 +52,7 @@ groups:
     logic: All
     tags:
       - PROD
+      - Production
 
 filter-tags:
   logic: Any
