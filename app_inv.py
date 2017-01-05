@@ -38,16 +38,16 @@ class ApplicationInventory(object):
     def _get_env_vars(self):
         API_PREFIX = "/api/"
         self.config_path = os.environ.get('CONFIG_PATH')
-        email = os.environ.get('APP_INV_EMAIL')
-        password = os.environ.get('APP_INV_PASSWORD')
-        domain = os.environ.get('APP_INV_DOMAIN')
+        email = os.environ.get('FLOW__EMAIL')
+        password = os.environ.get('FLOW__PASSWORD')
+        domain = os.environ.get('FLOW_DOMAIN')
         if domain and email and password:
             self.email = email
             self.domain = domain
             self.password = password
             self.api_url = "https://" + domain + API_PREFIX
         else:
-            fail("You must provice three environment variables: APP_INV_EMAIL APP_INV_PASSWORD and APP_INV_DOMAIN. The value found for these thee variables was APP_INV_EMAIL: '%s' APP_INV_PASSWORD '%s' and APP_INV_DOMAIN '%s'" % (email, password, domain))
+            fail("You must provide three environment variables: FLOW_EMAIL FLOW_PASSWORD and FLOW_DOMAIN. The value found for these thee variables was FLOW_EMAIL: '%s' FLOW_PASSWORD '%s' and FLOW_DOMAIN '%s'" % (email, password, domain))
 
     def _parse_config_file(self):
         config = dict()
