@@ -114,16 +114,12 @@ class ApplicationInventory(object):
             s = requests.get(self.api_url + "servers", params = params, cookies = self.cookie)
             data[g] = s.json()
         hostvars = {}
-        dev = 0
         for group, servers in data.iteritems():
             data[group] = []
             for s in servers:
                 if s[self.property] is not None:
                     data[group].append(s[self.property])
                     hostvars[s[self.property]] = s
-                dev += 1
-                if dev > 98:
-                    break
 
         response = data
         response["_meta"] = {"hostvars": hostvars}
