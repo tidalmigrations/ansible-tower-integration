@@ -2,7 +2,7 @@
 
 This script will allow your Ansible Tower instance to use servers that are stored in your Flow Migration Suite to run jobs against.
 
-If you are setting this up with Ansible Tower you should follow the tutorial posted [here](https://tidal.zendesk.com/hc/en-us/articles/115000763627)
+If you are setting this up with Ansible Tower you should follow the tutorial posted [here](https://tidal.zendesk.com/hc/en-us/articles/115000763627).
 
 If you would like to learn more about how this script works directly you should continue reading below.
 
