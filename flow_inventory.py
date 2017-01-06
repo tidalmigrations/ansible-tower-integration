@@ -98,7 +98,7 @@ class ApplicationInventory(object):
             s = requests.get(self.api_url + "servers", params = params, cookies = self.cookie)
         else:
             s = requests.get(self.api_url + "servers", cookies = self.cookie)
-        return s.json()[:100]
+        return s.json()
 
     def get_server(self):
         data = self.get_servers()
