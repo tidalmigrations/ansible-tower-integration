@@ -22,7 +22,7 @@ class Tidal(object):
         self.config_file = self._parse_config_file()
         self._set_default_config()
 
-        Tidal.cookie = self.login()
+        Tidal.headers = {"Authorization":"Bearer " + self.login()}
 
         if self.groups is not None:
             output = self.get_group_servers()
@@ -45,7 +45,7 @@ class Tidal(object):
             self.email = email
             self.domain = domain
             self.password = password
-            self.api_url = "https://" + domain + API_PREFIX
+            self.api_url = "http://" + domain + API_PREFIX
         else:
             fail("You must provide three environment variables: TIDAL_EMAIL TIDAL_PASSWORD and TIDAL_DOMAIN. The value found for these thee variables was TIDAL_EMAIL: '%s' TIDAL_PASSWORD '%s' and TIDAL_DOMAIN '%s'" % (email, password, domain))
 
@@ -79,10 +79,10 @@ class Tidal(object):
         return parser.parse_args()
 
     def login(self):
-        login_uri = self.api_url + "login"
-        body = {"email": self.email, "password": self.password}
+        login_uri = self.api_url + "authenticate"
+        body = {"username": self.email, "password": self.password}
         r = requests.post(login_uri, data = body)
-        return r.cookies
+        return r.json()["access_token"]
 
     def get_servers(self):
         if self.filter_tags and self.filter_tags["tags"]:
@@ -95,9 +95,9 @@ class Tidal(object):
                 params["query_type"] = self.filter_tags["logic"]
             else:
                 params["query_type"] = "All"
-            s = requests.get(self.api_url + "servers", params = params, cookies = self.cookie)
+            s = requests.get(self.api_url + "servers", params = params, headers = self.headers)
         else:
-            s = requests.get(self.api_url + "servers", cookies = self.cookie)
+            s = requests.get(self.api_url + "servers", headers = self.headers)
         return s.json()
 
     def get_server(self):
@@ -111,7 +111,7 @@ class Tidal(object):
         for g, props in groups.iteritems():
             tag_ids = ",".join([str(t["id"]) for t in props["tags"]])
             params = {"query_type": props["logic"], "tag_ids": tag_ids}
-            s = requests.get(self.api_url + "servers", params = params, cookies = self.cookie)
+            s = requests.get(self.api_url + "servers", params = params, headers = self.headers)
             data[g] = s.json()
         hostvars = {}
         for group, servers in data.iteritems():
@@ -137,7 +137,7 @@ class Tidal(object):
         return groups
 
     def get_tag(self, tag):
-        r = requests.get(self.api_url + "tags", params = {"search" : tag}, cookies = self.cookie)
+        r = requests.get(self.api_url + "tags", params = {"search" : tag}, headers = self.headers)
         return r.json()[0]["id"]
 
     def generate_data(self, data):
