@@ -9,18 +9,18 @@ If you would like to learn more about how this script works directly you should 
 
 ## Configure Environment Variables
 
-You must provide login credentials for the Application Inventory API via environment variables.
+You must provide login credentials for the Tidal Migrations API via environment variables.
 
-- `FLOW_DOMAIN`
-- `FLOW_EMAIL`
-- `FLOW_PASSWORD`
+- `TIDAL_DOMAIN`
+- `TIDAL_EMAIL`
+- `TIDAL_PASSWORD`
 
 For example you could run the these three commands on the host running Ansible Tower to set these:
 
 ```
-export FLOW_DOMAIN=flowdemo.tidalmg.com
-export FLOW_EMAIL=admin@tidalmigrations.com
-export FLOW_PASSWORD=yoursecurepasswordhere!
+export TIDAL_DOMAIN=demo.tidalmg.com
+export TIDAL_EMAIL=admin@tidalmigrations.com
+export TIDAL_PASSWORD=yoursecurepasswordhere!
 ```
 
 If you need to configure a proxy you can set the environment variables:
@@ -36,7 +36,7 @@ A configuration file can optionally be provided to customize the results returne
 
 In order to use the configuration file you must provide it's location via an environment variable. An example would be:
 
-`export CONFIG_PATH=/root/app_inv.yml`
+`export CONFIG_PATH=/root/tidal.yml`
 
 An exmaple configuration file would look like this:
 

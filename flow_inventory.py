@@ -11,7 +11,7 @@ def fail(msg):
     sys.stderr.write("%s\n" % msg)
     sys.exit(1)
 
-class ApplicationInventory(object):
+class Tidal(object):
 
     def __init__(self):
         self.args = self._parse_cli_args()
@@ -22,7 +22,7 @@ class ApplicationInventory(object):
         self.config_file = self._parse_config_file()
         self._set_default_config()
 
-        ApplicationInventory.cookie = self.login()
+        Tidal.cookie = self.login()
 
         if self.groups is not None:
             output = self.get_group_servers()
@@ -38,16 +38,16 @@ class ApplicationInventory(object):
     def _get_env_vars(self):
         API_PREFIX = "/api/"
         self.config_path = os.environ.get('CONFIG_PATH')
-        email = os.environ.get('FLOW__EMAIL')
-        password = os.environ.get('FLOW__PASSWORD')
-        domain = os.environ.get('FLOW_DOMAIN')
+        email = os.environ.get('TIDAL_EMAIL')
+        password = os.environ.get('TIDAL_PASSWORD')
+        domain = os.environ.get('TIDAL_DOMAIN')
         if domain and email and password:
             self.email = email
             self.domain = domain
             self.password = password
             self.api_url = "https://" + domain + API_PREFIX
         else:
-            fail("You must provide three environment variables: FLOW_EMAIL FLOW_PASSWORD and FLOW_DOMAIN. The value found for these thee variables was FLOW_EMAIL: '%s' FLOW_PASSWORD '%s' and FLOW_DOMAIN '%s'" % (email, password, domain))
+            fail("You must provide three environment variables: TIDAL_EMAIL TIDAL_PASSWORD and TIDAL_DOMAIN. The value found for these thee variables was TIDAL_EMAIL: '%s' TIDAL_PASSWORD '%s' and TIDAL_DOMAIN '%s'" % (email, password, domain))
 
     def _parse_config_file(self):
         config = dict()
@@ -69,7 +69,7 @@ class ApplicationInventory(object):
 
     def _parse_cli_args(self):
         parser = argparse.ArgumentParser(
-                description='Return Ansible inventory for one or more hosts via Application Inventory API')
+                description='Return Ansible inventory for one or more hosts via the Tidal Migrations API')
         parser.add_argument('--list', action='store_true', default=True,
                            help='List all hosts (default: True)')
         parser.add_argument('--host', action='store',
@@ -159,4 +159,4 @@ class ApplicationInventory(object):
         else:
             print(json.dumps(data))
 
-ApplicationInventory().run()
+Tidal().run()
