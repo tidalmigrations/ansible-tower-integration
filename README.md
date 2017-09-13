@@ -1,6 +1,6 @@
-# Flow Migration Suite integration for Ansible Tower
+# Tidal Migrations integration with Ansible Tower
 
-This script will allow your Ansible Tower instance to use servers that are stored in your Flow Migration Suite to run jobs against.
+This script will allow your Ansible Tower instance to use servers that are stored in your Tidal Migrations application to run jobs against.
 
 If you are setting this up with Ansible Tower you should follow the tutorial posted [here](https://tidal.zendesk.com/hc/en-us/articles/115000763627).
 
@@ -28,7 +28,7 @@ If you need to configure a proxy you can set the environment variables:
 - `HTTP_PROXY`
 - `HTTPS_PROXY`
 
-This is needed if the script is running on a system that requires a proxy to reach your Flow Migration API.
+This is needed if the script is running on a system that requires a proxy to reach your Tidal Migrations API.
 
 ## Configuration
 
