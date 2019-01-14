@@ -6,6 +6,9 @@ import sys
 import json
 import yaml
 import argparse
+import getpass
+
+PY3 = sys.version_info[0] == 3
 
 def fail(msg):
     sys.stderr.write("%s\n" % msg)
@@ -17,7 +20,7 @@ class Tidal(object):
         self.args = self._parse_cli_args()
 
     def run(self):
-        self._get_env_vars()
+        self._get_params()
         self._args = self._parse_cli_args()
         self.config_file = self._parse_config_file()
         self._set_default_config()
@@ -35,12 +38,12 @@ class Tidal(object):
 
         self.output_data(output)
 
-    def _get_env_vars(self):
+    def _get_params(self):
         API_PREFIX = "/api/v1/"
         self.config_path = os.environ.get('CONFIG_PATH')
-        email = os.environ.get('TIDAL_EMAIL')
-        password = os.environ.get('TIDAL_PASSWORD')
-        domain = os.environ.get('TIDAL_DOMAIN')
+        email = os.environ.get('TIDAL_EMAIL') or self._prompt_for('TIDAL_EMAIL')
+        password = os.environ.get('TIDAL_PASSWORD') or self._prompt_for('TIDAL_PASSWORD')
+        domain = os.environ.get('TIDAL_DOMAIN') or self._prompt_for('TIDAL_DOMAIN')
         if domain and email and password:
             self.email = email
             self.domain = domain
@@ -48,6 +51,19 @@ class Tidal(object):
             self.api_url = "https://" + domain + API_PREFIX
         else:
             fail("You must provide three environment variables: TIDAL_EMAIL TIDAL_PASSWORD and TIDAL_DOMAIN. The value found for these thee variables was TIDAL_EMAIL: '%s' TIDAL_PASSWORD '%s' and TIDAL_DOMAIN '%s'" % (email, password, domain))
+
+    def _prompt_for(self, var):
+        prompts = {
+            'TIDAL_EMAIL': 'Tidal E-mail: ',
+            'TIDAL_PASSWORD': 'Tidal Password: ',
+            'TIDAL_DOMAIN': 'Tidal domain: '
+        }
+        if var == 'TIDAL_PASSWORD':
+            return getpass.getpass(prompt=prompts[var])
+        elif PY3:
+            return input(prompts[var])
+        else:
+            return raw_input(prompts[var])
 
     def _parse_config_file(self):
         config = dict()
