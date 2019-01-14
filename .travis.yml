@@ -1,0 +1,5 @@
+language: minimal
+python:
+  - "2.x"
+  - "3.x"
+script: python tidal_inventory.py > /dev/null
