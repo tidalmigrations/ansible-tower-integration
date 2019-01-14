@@ -1,5 +1,5 @@
 language: python
 python:
-  - "2.x"
-  - "3.x"
+  - "2.7"
+  - "3.7"
 script: python tidal_inventory.py > /dev/null
