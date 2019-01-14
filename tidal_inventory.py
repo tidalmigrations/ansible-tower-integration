@@ -36,7 +36,7 @@ class Tidal(object):
         self.output_data(output)
 
     def _get_env_vars(self):
-        API_PREFIX = "/api/"
+        API_PREFIX = "/api/v1/"
         self.config_path = os.environ.get('CONFIG_PATH')
         email = os.environ.get('TIDAL_EMAIL')
         password = os.environ.get('TIDAL_PASSWORD')
@@ -45,7 +45,7 @@ class Tidal(object):
             self.email = email
             self.domain = domain
             self.password = password
-            self.api_url = "http://" + domain + API_PREFIX
+            self.api_url = "https://" + domain + API_PREFIX
         else:
             fail("You must provide three environment variables: TIDAL_EMAIL TIDAL_PASSWORD and TIDAL_DOMAIN. The value found for these thee variables was TIDAL_EMAIL: '%s' TIDAL_PASSWORD '%s' and TIDAL_DOMAIN '%s'" % (email, password, domain))
 
