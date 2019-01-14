@@ -1,5 +1,8 @@
 language: python
 python:
-  - "2.7"
-  - "3.6"
+- '2.7'
+- '3.6'
 script: python tidal_inventory.py > /dev/null
+notifications:
+  slack:
+    secure: aRmxFGmlgZOrxDSLl557jZykU2+Whi7V84jdpUM82mf4vdoMi8h+3tFsDNttSbC7HXP626LQ9fiOXahEq6ehAIcKGN9oO2TNwzSCKz+XDR0Czqc0QO+PgJI8caMwv57wH0UHjx1EEutjTGOpTSSM989J5yKFDrxr+FtLMX37yJnLrLMXdu1mmcWve2IWdmE9bFz68EdLgEuCJPVzQPJKR3lTxIHSlLhsjRjmrVTLNK/iUXeeDc2lyaV8e+y8JGiACr7E42lL1cEyK7ngPuGvf9n0GRCrrnPeNmTgIDx2jgU4fDDEPJ8dYkY1gTbUVuu3ye1J7xcSgexiEeu1jYV4+0jthqeTLiJxhMGzqE2KaZzWNohI8V53KBnYmEInO0XqEAbgIQTTteHXOtzqlgQvnR2Xwh6hePvmy7I+YozGXhoM84Bs45tZdiQUiNJVatwQ/LoKSwDX3rr1Kwr2Oi7mQVkXt3+gl+UKOMjpTr4PR7jtZFm9inQNSGzbfLGEPguozcUMEMxDDVxJrZQQt/W+fHlmYo6j3QHmLzriezbD63dxTAH2ZWdu5lBcDPi5MKm9qofypdKUNs0EPDvOYlJuQauzAxc/hcaZv8n8o5Afv98j14rU/HRYubYAPPXXFG6O/E45CyHuCpK/CmD5KbJ/RN2U0rlJ2AUPAP30OahwiiU=
