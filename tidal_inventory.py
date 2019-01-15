@@ -60,10 +60,11 @@ class Tidal(object):
         }
         if var == 'TIDAL_PASSWORD':
             return getpass.getpass(prompt=prompts[var])
-        elif PY3:
-            return input(prompts[var])
+        sys.stderr.write(prompts[var])
+        if PY3:
+            return input()
         else:
-            return raw_input(prompts[var])
+            return raw_input()
 
     def _parse_config_file(self):
         config = dict()
